@@ -9,6 +9,12 @@
   padding-block: 0 !important;
 }
 
+/* The new-tab dialog still uses the selected browser's URL bar, but its zoom
+   level only applies to that existing page. */
+#urlbar[zen-newtab] #urlbar-zoom-button {
+  display: none !important;
+}
+
 :root[zen-single-toolbar="true"] {
   & #urlbar:not([breakout-extend]) {
     padding: 1px;
