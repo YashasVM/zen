@@ -22,3 +22,5 @@ support-files = [
 ["browser_glance_select_parent.js"]
 
 ["browser_issue_14049.js"]
+
+["browser_issue_16611.js"]

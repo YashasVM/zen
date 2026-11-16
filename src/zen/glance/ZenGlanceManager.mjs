@@ -394,6 +394,9 @@ class nsZenGlanceManager extends nsZenDOMOperatedFeature {
     newTab.setAttribute("zen-glance-tab", true);
     newTab.setAttribute("glance-id", glanceId);
     currentTab.setAttribute("glance-id", glanceId);
+
+    // TabOpen counted this tab before it moved out of the normal tab list.
+    gZenWorkspaces.updateTabsContainers();
   }
 
   /**
