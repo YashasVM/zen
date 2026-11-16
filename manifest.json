@@ -1,0 +1,22 @@
+{
+  "issue": "https://github.com/zen-browser/desktop/issues/16616",
+  "base_commit": "535ccb0",
+  "fix_commit": "e90f7de",
+  "review": "APPROVE by fresh gpt-6.1-sol reviewer",
+  "runtime": "Zen 1.24.2b (Linux x86_64), headless Marionette",
+  "method": "Exact CSS rule patched into release browser omni.ja; regression source run through compatibility harness; not native mochitest or a compiled source build",
+  "files": {
+    "regression-after.json": "c415f77d7b5366c1c488f4b6a091f2d3cf36e5b0ddb4bc2e72d1119cd99b1ea6",
+    "after.json": "01c3703d38ad487c8aaffbf86fb925357bdfd91044fb66cef23c46fe15601f1d",
+    "run_regression.py": "19c156c9487ed011bdb2635f85f137eed055617d77a441e014cbeb98acc9843f",
+    "fix-16616.patch": "8021c2fd01d13d0caf4f8a3016f9d7dffc46fba35203a64f45ca08ff8f95212c",
+    "after.png": "c89212bea1bf52eba73b70fe8dcee390adcee5d416e88e506a7653864e3912f1",
+    "regression-review.json": "c415f77d7b5366c1c488f4b6a091f2d3cf36e5b0ddb4bc2e72d1119cd99b1ea6",
+    "zoom_proof.py": "d9f4b9b2b7c7d7f29f484a624b21b03a000f00f75acf02ef3df9c547a1bfa4de",
+    "before.png": "911d6bf28550fa3135941549eacaeb05602078c7de9a412785f9c5b4dd86b5b4",
+    "regression-before.json": "7544b4a88659fb70592891c4a7ff850d487001e1a70c2af6b16b54954f07dda4",
+    "patch_browser.py": "8a6495b154982acb3e7ffc538e598cfc4492e2033a20e98d7cdd87d6b2fecfe9",
+    "before.json": "630b2dc66a9dd007cab1c79c7cec558d93aa589c4445fdad628029e31524184b",
+    "sol-review.txt": "0cc51125df488af938bf51cc2f25e795d6a0da207ba3ad2e5fd27312f6924c7c"
+  }
+}

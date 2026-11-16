@@ -1,0 +1,110 @@
+From e90f7de27666816aa2234efdf0c58dc697a839e5 Mon Sep 17 00:00:00 2001
+From: Yashas VM <yashasvmtvzzz@gmail.com>
+Date: Mon, 16 Nov 2026 11:36:28 +0530
+Subject: [PATCH] gh-16616: Hide current page zoom in the new-tab dialog
+
+---
+ src/zen/common/styles/zen-omnibox.css       |  6 +++
+ src/zen/tests/urlbar/browser.toml           |  2 +
+ src/zen/tests/urlbar/browser_issue_16616.js | 59 +++++++++++++++++++++
+ 3 files changed, 67 insertions(+)
+ create mode 100644 src/zen/tests/urlbar/browser_issue_16616.js
+
+diff --git a/src/zen/common/styles/zen-omnibox.css b/src/zen/common/styles/zen-omnibox.css
+index 070d2c5..938960f 100644
+--- a/src/zen/common/styles/zen-omnibox.css
++++ b/src/zen/common/styles/zen-omnibox.css
+@@ -9,6 +9,12 @@
+   padding-block: 0 !important;
+ }
+ 
++/* The new-tab dialog still uses the selected browser's URL bar, but its zoom
++   level only applies to that existing page. */
++#urlbar[zen-newtab] #urlbar-zoom-button {
++  display: none !important;
++}
++
+ :root[zen-single-toolbar="true"] {
+   & #urlbar:not([breakout-extend]) {
+     padding: 1px;
+diff --git a/src/zen/tests/urlbar/browser.toml b/src/zen/tests/urlbar/browser.toml
+index 7dc2b49..f115fe4 100644
+--- a/src/zen/tests/urlbar/browser.toml
++++ b/src/zen/tests/urlbar/browser.toml
+@@ -13,6 +13,8 @@ support-files = [
+ 
+ ["browser_issue_7385.js"]
+ 
++["browser_issue_16616.js"]
++
+ ["browser_sidebar_provider.js"]
+ 
+ ["browser_top_sites_shortcuts.js"]
+diff --git a/src/zen/tests/urlbar/browser_issue_16616.js b/src/zen/tests/urlbar/browser_issue_16616.js
+new file mode 100644
+index 0000000..7f6096e
+--- /dev/null
++++ b/src/zen/tests/urlbar/browser_issue_16616.js
+@@ -0,0 +1,59 @@
++/* Any copyright is dedicated to the Public Domain.
++   https://creativecommons.org/publicdomain/zero/1.0/ */
++
++"use strict";
++
++add_task(async function test_newtab_hides_current_page_zoom() {
++  await SpecialPowers.pushPrefEnv({
++    set: [
++      ["zen.urlbar.replace-newtab", true],
++      ["zen.view.use-single-toolbar", false],
++    ],
++  });
++  try {
++    await BrowserTestUtils.withNewTab("https://example.com/", async () => {
++      const button = document.getElementById("urlbar-zoom-button");
++      const visible = () => !!button.getClientRects().length;
++      try {
++        FullZoom.setZoom(1.5);
++        await TestUtils.waitForCondition(
++          () => ZoomManager.zoom === 1.5 && visible(),
++          "The current page's zoom indicator is visible",
++        );
++
++        Assert.ok(
++          gZenUIManager.handleNewTab(false, false, "tab", true),
++          "The new-tab dialog opens",
++        );
++        await TestUtils.waitForCondition(
++          () => gURLBar.hasAttribute("zen-newtab"),
++          "The URL bar is in new-tab mode",
++        );
++        Assert.ok(!visible(), "The new-tab dialog hides the old page's zoom");
++        Assert.equal(
++          ZoomManager.zoom,
++          1.5,
++          "Opening the dialog keeps page zoom",
++        );
++
++        gURLBar._zenHandleUrlbarClose(false);
++        gURLBar.blur();
++        await TestUtils.waitForCondition(
++          () => !gURLBar.hasAttribute("zen-newtab") && visible(),
++          "Closing the dialog restores the current page's zoom indicator",
++        );
++        Assert.equal(
++          ZoomManager.zoom,
++          1.5,
++          "Closing the dialog keeps page zoom",
++        );
++      } finally {
++        gURLBar._zenHandleUrlbarClose?.(false);
++        gURLBar.blur();
++        await FullZoom.reset();
++      }
++    });
++  } finally {
++    await SpecialPowers.popPrefEnv();
++  }
++});
+-- 
+2.52.0
+

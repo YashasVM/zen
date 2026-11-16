@@ -1,0 +1,29 @@
+{
+  "normal": {
+    "newtab": false,
+    "zoom": 1.5,
+    "hidden": false,
+    "display": "flex",
+    "visible": true,
+    "label": "150%",
+    "tab": "about:robots"
+  },
+  "newtab": {
+    "newtab": true,
+    "zoom": 1.5,
+    "hidden": false,
+    "display": "flex",
+    "visible": true,
+    "label": "150%",
+    "tab": "about:robots"
+  },
+  "closed": {
+    "newtab": false,
+    "zoom": 1.5,
+    "hidden": false,
+    "display": "flex",
+    "visible": true,
+    "label": "150%",
+    "tab": "about:robots"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "pass": false,
+  "error": "Error: The new-tab dialog hides the old page's zoom",
+  "checks": [
+    {
+      "pass": true,
+      "message": "The new-tab dialog opens"
+    },
+    {
+      "pass": false,
+      "message": "The new-tab dialog hides the old page's zoom"
+    }
+  ]
+}

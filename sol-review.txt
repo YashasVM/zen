@@ -1,0 +1,11 @@
+Fresh independent reviewer: gpt-6.1-sol, high reasoning, no inherited conversation.
+Verdict: APPROVE.
+
+No blocking correctness or regression findings in the final diff, including the formatted regression test.
+
+The CSS follows the controller's existing zen-newtab lifecycle and restores the badge automatically when the dialog closes.
+Independently reran the source regression through the Marionette harness: passed.
+Independently tested single-toolbar mode with its zoom button enabled: badge visible normally, hidden during new-tab dialog, restored afterward, and visible when editing the current page's URL. Zoom remained 150% throughout.
+New test formatting and git diff --check pass.
+
+Validation limitation: testing used released Zen 1.24.2b with the CSS patched into omni.ja; the compatibility harness is not native mochitest, and the current source tree was not compiled. Disclose those limits in the PR.
