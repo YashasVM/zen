@@ -1,0 +1,46 @@
+{
+  "geometry": {
+    "left": 0,
+    "right": 186,
+    "bottom": 661.4166870117188,
+    "top": 124,
+    "width": 186,
+    "clientWidth": 174,
+    "clientHeight": 537,
+    "scrollHeight": 1818,
+    "padding": "116px"
+  },
+  "initial": 42,
+  "primary_padding": {
+    "count": 43,
+    "events": [
+      {
+        "target": "arrowscrollbox",
+        "original": "scrollbox",
+        "composed": "scrollbox",
+        "button": 0,
+        "isInner": true
+      }
+    ]
+  },
+  "secondary_padding": {
+    "count": 43,
+    "events": []
+  },
+  "scrollbar": {
+    "count": 43,
+    "events": []
+  },
+  "tab": {
+    "count": 43,
+    "events": [
+      {
+        "target": "label",
+        "original": "label",
+        "composed": "label",
+        "button": 0,
+        "isInner": false
+      }
+    ]
+  }
+}

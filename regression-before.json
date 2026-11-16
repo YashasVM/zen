@@ -1,0 +1,10 @@
+{
+  "pass": false,
+  "error": "Error: Double-clicking the overflow padding opens a new tab",
+  "checks": [
+    {
+      "pass": true,
+      "message": "The double-click hit the scrollbox padding, not a tab or control"
+    }
+  ]
+}

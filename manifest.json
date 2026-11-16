@@ -1,0 +1,24 @@
+{
+  "issue": "https://github.com/zen-browser/desktop/issues/16482",
+  "base_commit": "535ccb0",
+  "fix_commit": "851b931",
+  "review": "APPROVE by fresh gpt-6.1-sol reviewer",
+  "runtime": "Zen 1.24.2b Linux x86_64, headless Marionette",
+  "method": "Exact changed handler guard patched into release omni.ja. Real WebDriver pointer actions plus unmodified added regression task through compatibility wrappers. Not native mochitest or compiled source build.",
+  "files": {
+    "run_overflow_regression.py": "9e5800f797f356b421da2f5e10cbbbc76ad4b7fc42a159bf280901e3effa5700",
+    "regression-after.json": "f64e3204c55f5e056ab3d8e56f6d994c8e3c898ecc2c986b23d0c6fd9f40612b",
+    "after.json": "0184d841319f5510ce2d4b35f460ebecc9f8ebb860fcea88d286a77c803e59b3",
+    "pr-description.txt": "9b90bc8e22066e769dbbda4456e3a261f5e273be9d3cf7e011bde8b604db1830",
+    "after.png": "944ba7ce52696e1aaffed2a4c2b92bfeb070522cfc018c889f1b965885942d2e",
+    "regression-review.json": "f64e3204c55f5e056ab3d8e56f6d994c8e3c898ecc2c986b23d0c6fd9f40612b",
+    "before.png": "e854b5ca4f3f7f68a845a4c3b3dca71a957b2f9844a2b8d5bb4f9679e1bba95c",
+    "regression-before.json": "5de746716ec8bb90a11ca4900d8fe6815f810ed8f975e2c00cdb3b405b9c44c0",
+    "patch_overflow.py": "e89e047751cb7005f07e58ecd218f2f10ebcc945e503234915d0ec25690e93ae",
+    "fix-16482.patch": "e91c64f27fe926aa07e5bce7473d4d80d126c62f35f1695a2bc8f327bbaee37f",
+    "overflow_proof.py": "5d5b83db77f4cf45ff3ae11349929c4d9658e8038fdedde437c7344694b39dd5",
+    "before.json": "4344afd328b9f7de6862bc1474cf485ffe49b9e64d71d9187bfe157b14737e6f",
+    "review-controls.json": "8ec01c9f2a7277a321856fc91cd0e5b3a19cdbec9f293695d16d2e568c7e3413",
+    "sol-review.txt": "e3e6ac3b39936123a8ddc414084da503448e023ad0d147ca32cbba58864ba5a5"
+  }
+}

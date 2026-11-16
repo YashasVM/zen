@@ -1,0 +1,12 @@
+Closes #16482.
+
+When the sidebar tab list overflowed, double-clicking its bottom padding was ignored: the event is retargeted to the arrowscrollbox, with the internal scrollbox as `originalTarget`, rather than the separate `zen-workspace-empty-space` element. Accept that empty scrollbox target in the existing double-click handler while preserving the primary-button and toolbarbutton guards.
+
+Extends the existing browser test with an overflowing tab list, a double-click at real padding coordinates, an assertion that the internal scrollbox received the click, and verification that exactly one tab opens.
+
+Validation:
+- Reproduced in Zen 1.24.2b with real WebDriver pointer actions: before, no new-tab dialog; after, the dialog opens. Captured matching event targets, geometry, and screenshots.
+- Executed the unmodified new regression task against the real browser through a Marionette compatibility harness: fails before and passes after.
+- JavaScript syntax, test formatting, unified-patch parsing, and `git diff --check` pass.
+
+Runtime checks used the exact changed handler condition patched into the released browser's `omni.ja`. The current source tree was not compiled; native mochitest was not run.

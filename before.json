@@ -1,0 +1,18 @@
+{
+  "newtab": false,
+  "events": [
+    {
+      "target": "arrowscrollbox",
+      "original": "scrollbox",
+      "shadowScrollbox": true
+    }
+  ],
+  "geometry": {
+    "x": 93,
+    "y": 631.4166870117188,
+    "overflowing": true,
+    "scrollHeight": 1378,
+    "clientHeight": 537,
+    "target": "slot"
+  }
+}

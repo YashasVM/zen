@@ -1,0 +1,9 @@
+{
+  "pass": true,
+  "checks": [
+    {
+      "pass": true,
+      "message": "The double-click hit the scrollbox padding, not a tab or control"
+    }
+  ]
+}

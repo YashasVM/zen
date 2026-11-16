@@ -1,0 +1,9 @@
+Fresh independent reviewer: gpt-6.1-sol, high reasoning, no inherited conversation.
+Verdict: APPROVE — no findings.
+
+Guard allows only the active inner scrollbox while retaining primary-button and toolbarbutton exclusions.
+All 16 patch hunk counts and cumulative offsets validate; syntax and whitespace checks pass.
+Independent real pointer checks: padding opens exactly one tab; secondary clicks, native scrollbar clicks, and tab double-clicks open none.
+Added regression passes independently using original EventUtils with compatibility wrappers. Native mochitest remains unrun.
+
+Evidence: review-controls.json and regression-review.json. Source and browser archive unchanged by reviewer.
