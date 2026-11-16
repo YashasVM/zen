@@ -1,0 +1,23 @@
+{
+  "issue": "https://github.com/zen-browser/desktop/issues/16611",
+  "base_commit": "535ccb0",
+  "fix_commit": "c12fe72",
+  "review": "APPROVE by fresh gpt-6.1-sol reviewer",
+  "runtime": "Zen 1.24.2b Linux x86_64, headless Marionette",
+  "method": "Exact source change patched into release browser omni.ja. Unmodified source regression through compatibility wrappers. Not native mochitest or a compiled source build.",
+  "files": {
+    "regression-after.json": "5d81e0cbcff1b6c028c1da8c92edbc35250f4c65ce710ce49f458887c289a8b0",
+    "after.json": "7a79520aa4061c0d440e7d498a5b3db9ec877cad93b68e4fac10744caf64a7db",
+    "pr-description.txt": "89c04f153f05bf09edc1f00245a0beb145de8bc0634f960accea4dc63b4dd24c",
+    "after.png": "f505e7a6b372c8fb1967de437f8de5b72b2c21b29f36561367afdcb4ac4bbad1",
+    "regression-review.json": "5d81e0cbcff1b6c028c1da8c92edbc35250f4c65ce710ce49f458887c289a8b0",
+    "before.png": "2ded645da6f8a634d48c49fb678ef9c0a38d58befbfcc5041ce2ecb5ef3370d7",
+    "regression-before.json": "cf8ebc4ab44983b07e5ad0dbeb7b5d8b2a6a200357165a06ac2b6f04fbf64bd2",
+    "run_glance_regression.py": "3267e2ae3e30c8756d5a709ab786d6e170036b2bb9c37499b4416b577e7dd2aa",
+    "fix-16611.patch": "04143fd57754558f13615127a999f47ec406ea1e2a4cc399a78d2f6ed0df1730",
+    "patch_glance.py": "521e53e3aff32b15bb9ae85e36d4525a10a4b27ed42116d9b75cb1da25dd467e",
+    "before.json": "e300871aa4e3d4a3b0fef6259ba7098cdb26168a25330ed6c13e4f4b72ed9216",
+    "sol-review.txt": "99996838b85bb9d899fcaed8e6a4080b250b6f832c996a4277a3aa22b360c689",
+    "glance_proof.py": "a0335a69cf398d58eb2911da3461bcbcd6e13a3a52c1c163178a040d4755c916"
+  }
+}

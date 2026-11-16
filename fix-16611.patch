@@ -1,0 +1,133 @@
+From c12fe720023d6ceb52ff212e23c6da5c02280e18 Mon Sep 17 00:00:00 2001
+From: Yashas VM <yashasvmtvzzz@gmail.com>
+Date: Mon, 16 Nov 2026 12:27:50 +0530
+Subject: [PATCH] gh-16611: Refresh empty tab layout after opening Glance
+
+---
+ src/zen/glance/ZenGlanceManager.mjs         |  3 +
+ src/zen/tests/glance/browser.toml           |  2 +
+ src/zen/tests/glance/browser_issue_16611.js | 88 +++++++++++++++++++++
+ 3 files changed, 93 insertions(+)
+ create mode 100644 src/zen/tests/glance/browser_issue_16611.js
+
+diff --git a/src/zen/glance/ZenGlanceManager.mjs b/src/zen/glance/ZenGlanceManager.mjs
+index 29bcc17..aa61d33 100644
+--- a/src/zen/glance/ZenGlanceManager.mjs
++++ b/src/zen/glance/ZenGlanceManager.mjs
+@@ -394,6 +394,9 @@ class nsZenGlanceManager extends nsZenDOMOperatedFeature {
+     newTab.setAttribute("zen-glance-tab", true);
+     newTab.setAttribute("glance-id", glanceId);
+     currentTab.setAttribute("glance-id", glanceId);
++
++    // TabOpen counted this tab before it moved out of the normal tab list.
++    gZenWorkspaces.updateTabsContainers();
+   }
+ 
+   /**
+diff --git a/src/zen/tests/glance/browser.toml b/src/zen/tests/glance/browser.toml
+index 9fcf639..2b9e966 100644
+--- a/src/zen/tests/glance/browser.toml
++++ b/src/zen/tests/glance/browser.toml
+@@ -22,3 +22,5 @@ support-files = [
+ ["browser_glance_select_parent.js"]
+ 
+ ["browser_issue_14049.js"]
++
++["browser_issue_16611.js"]
+diff --git a/src/zen/tests/glance/browser_issue_16611.js b/src/zen/tests/glance/browser_issue_16611.js
+new file mode 100644
+index 0000000..9aac071
+--- /dev/null
++++ b/src/zen/tests/glance/browser_issue_16611.js
+@@ -0,0 +1,88 @@
++/* Any copyright is dedicated to the Public Domain.
++   https://creativecommons.org/publicdomain/zero/1.0/ */
++
++"use strict";
++
++add_task(async function test_glance_keeps_empty_tab_area() {
++  await SpecialPowers.pushPrefEnv({
++    set: [
++      ["zen.window-sync.enabled", false],
++      ["zen.testing.enabled", false],
++      ["zen.urlbar.open-on-startup", false],
++    ],
++  });
++  const win = await BrowserTestUtils.openNewBrowserWindow();
++  try {
++    await win.gZenWorkspaces.promiseInitialized;
++    await win.gZenStartup.promiseInitialized;
++    // Exercise the TabOpen layout updates and animations used outside tests.
++    win.gZenUIManager.testingEnabled = false;
++    const browser = win.gBrowser;
++    const parent = BrowserTestUtils.addTab(browser, "about:robots", {
++      skipAnimation: true,
++    });
++    await TestUtils.waitForCondition(
++      () =>
++        parent.linkedBrowser.currentURI.spec === "about:robots" &&
++        !parent.linkedBrowser.webProgress.isLoadingDocument,
++      "The pinned page has loaded",
++    );
++    browser.pinTab(parent);
++    browser.selectedTab = parent;
++    for (const tab of [...browser.tabs]) {
++      if (tab !== parent && !tab.hasAttribute("zen-empty-tab")) {
++        await BrowserTestUtils.removeTab(tab);
++      }
++    }
++    const pins = win.gZenWorkspaces.activeWorkspaceElement.pinnedTabsContainer;
++    await TestUtils.waitForCondition(
++      () => pins.hasAttribute("hide-separator"),
++      "The separator is hidden without unpinned tabs",
++    );
++    // Drain delayed startup and tab-close layout updates; an incidental refresh
++    // after opening the Glance would mask the stale-container regression.
++    await new Promise((resolve) => {
++      // eslint-disable-next-line mozilla/no-arbitrary-setTimeout
++      win.setTimeout(resolve, 1000);
++    });
++
++    await win.gZenGlanceManager.openGlance({
++      url: "about:robots",
++      clientX: 0,
++      clientY: 0,
++      width: 0,
++      height: 0,
++      triggeringPrincipal: Services.scriptSecurityManager.getSystemPrincipal(),
++    });
++    Assert.ok(
++      browser.selectedTab.hasAttribute("zen-glance-tab"),
++      "A Glance opened from the pinned tab",
++    );
++    await TestUtils.waitForCondition(
++      () => !browser.selectedBrowser.webProgress.isLoadingDocument,
++      "The Glance page has loaded",
++    );
++    // Let the queued container update run before checking the final layout.
++    await new Promise((resolve) => {
++      win.requestAnimationFrame(() => win.requestAnimationFrame(resolve));
++    });
++    Assert.ok(
++      pins.hasAttribute("hide-separator"),
++      "A Glance alone keeps the normal tab area empty",
++    );
++
++    const normalTab = BrowserTestUtils.addTab(browser, "about:blank");
++    await TestUtils.waitForCondition(
++      () => !pins.hasAttribute("hide-separator"),
++      "A real unpinned tab still shows the separator",
++    );
++    await BrowserTestUtils.removeTab(normalTab);
++    await TestUtils.waitForCondition(
++      () => pins.hasAttribute("hide-separator"),
++      "Closing the real tab hides the separator while the Glance remains",
++    );
++  } finally {
++    await BrowserTestUtils.closeWindow(win);
++    await SpecialPowers.popPrefEnv();
++  }
++});
+-- 
+2.52.0
+

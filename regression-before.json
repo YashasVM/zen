@@ -1,0 +1,14 @@
+{
+  "pass": false,
+  "error": "Error: A Glance alone keeps the normal tab area empty",
+  "checks": [
+    {
+      "pass": true,
+      "message": "A Glance opened from the pinned tab"
+    },
+    {
+      "pass": false,
+      "message": "A Glance alone keeps the normal tab area empty"
+    }
+  ]
+}

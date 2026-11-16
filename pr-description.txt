@@ -1,0 +1,13 @@
+Closes #16611.
+
+Opening a Glance from a pinned tab briefly adds its new tab to the normal tab list. After the Glance moves beneath its pinned parent, the normal tab area's layout can retain the separator and spacing for a nonempty tab list. Queue a tab-container refresh after configuring and reparenting the Glance so the separator reflects the remaining normal tabs.
+
+Adds a browser regression that opens a Glance with no normal tabs, checks the separator stays hidden, and verifies that adding/removing a real unpinned tab still shows/hides it.
+
+Validation:
+- Reproduced on Zen 1.24.2b: before, the separator becomes visible with only a pinned parent and Glance; after, it stays hidden.
+- Unmodified source regression executed against the actual browser through Marionette compatibility wrappers: fails before, passes after. A delayed fixture-layout refresh initially masked the bug; the test explicitly drains that work before opening the Glance.
+- Fresh independent Sol reviewer: APPROVE. Independently reran the regression, including normal-tab controls, and checked the runtime delta against the source fix.
+- Test formatting, JavaScript syntax, and git diff --check pass.
+
+Runtime verification applied the exact source change to the released browser's omni.ja. The source tree was not compiled, and native mochitest was not run.

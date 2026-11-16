@@ -1,0 +1,13 @@
+{
+  "pass": true,
+  "checks": [
+    {
+      "pass": true,
+      "message": "A Glance opened from the pinned tab"
+    },
+    {
+      "pass": true,
+      "message": "A Glance alone keeps the normal tab area empty"
+    }
+  ]
+}

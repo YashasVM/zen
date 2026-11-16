@@ -1,0 +1,10 @@
+Fresh independent reviewer: gpt-6.1-sol, high reasoning, no inherited conversation.
+Verdict: APPROVE.
+
+The fix refreshes tab containers after Glance is reparented, correcting the stale separator state.
+Baseline regression fails at the separator assertion.
+Independent patched-runtime regression passes, including normal-tab controls.
+Main-window evidence changes from separator visible before to hidden after.
+Runtime patch matches the source fix; git diff --check passes.
+The documented fixture delay is acceptable given demonstrated delayed layout updates.
+Full native browser-test harness was unavailable; validation used compatibility wrappers.

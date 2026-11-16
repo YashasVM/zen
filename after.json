@@ -1,0 +1,73 @@
+{
+  "initial": {
+    "separatorHidden": true,
+    "children": [
+      {
+        "tag": "tab",
+        "empty": true,
+        "glance": false,
+        "hidden": false,
+        "closing": false,
+        "id": "1794812057320-e4906398-95f3-4f01-88d8-bd0ac27a633a"
+      },
+      {
+        "tag": "hbox",
+        "empty": false,
+        "glance": false,
+        "hidden": false,
+        "closing": null,
+        "id": "tabbrowser-arrowscrollbox-periphery"
+      }
+    ],
+    "tabs": [
+      {
+        "pinned": true,
+        "glance": false,
+        "parent": "vbox"
+      },
+      {
+        "pinned": false,
+        "glance": false,
+        "parent": "vbox"
+      }
+    ]
+  },
+  "glance": {
+    "separatorHidden": true,
+    "children": [
+      {
+        "tag": "tab",
+        "empty": true,
+        "glance": false,
+        "hidden": false,
+        "closing": false,
+        "id": "1794812057320-e4906398-95f3-4f01-88d8-bd0ac27a633a"
+      },
+      {
+        "tag": "hbox",
+        "empty": false,
+        "glance": false,
+        "hidden": false,
+        "closing": null,
+        "id": "tabbrowser-arrowscrollbox-periphery"
+      }
+    ],
+    "tabs": [
+      {
+        "pinned": true,
+        "glance": false,
+        "parent": "vbox"
+      },
+      {
+        "pinned": false,
+        "glance": true,
+        "parent": "hbox"
+      },
+      {
+        "pinned": false,
+        "glance": false,
+        "parent": "vbox"
+      }
+    ]
+  }
+}
